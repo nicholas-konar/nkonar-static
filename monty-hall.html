@@ -5,40 +5,68 @@
     <meta charset="UTF-8" />
     <title>Monty Hall Simulator</title>
     <link rel="stylesheet" href="style.css" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
 </head>
 
 <body>
     <header>
         <h1>Monty Hall Dilemma Game Simulator</h1>
     </header>
+    <section>
+        <p>Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car; behind
+            the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens
+            another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it to
+            your advantage to switch your choice?</p>
+    </section>
+    <section>
+        <h3>Bayes' Theorem</h3>
+        <p>
+            $$
+            P(H \mid E) = \frac{P(E \mid H) \cdot P(H)}{P(E)}
+            $$
+        <ul>
+            <li>\(P(H \mid E)\) is the posterior probability of hypothesis \(H\) given evidence \(E\).</li>
+            <li>\(P(E \mid H)\) is the likelihood of observing evidence \(E\) given \(H\).</li>
+            <li>\(P(H)\) is the prior probability of \(H\).</li>
+            <li>\(P(E)\) is the total probability of observing evidence \(E\).</li>
+        </ul>
+        </p>
+    </section>
 
     <main>
-        <div class="form-group">
-            <label for="doors">Number of Doors:</label>
-            <input type="number" id="doors" name="doors" value="3" min="3" max="1000" />
-        </div>
+        <section>
+            <h3>Interactive Simulator</h3>
+        </section>
+        <section>
+            <h3>Bulk Simulator</h3>
+            <div class="form-group">
+                <label for="doors"># of doors:</label>
+                <input type="number" id="doors" name="doors" value="3" min="3" max="1000" />
+            </div>
 
-        <div class="form-group">
-            <label for="rounds">Number of Rounds:</label>
-            <input type="number" id="rounds" name="rounds" value="100" min="1" />
-        </div>
+            <div class="form-group">
+                <label for="rounds"># of simulations:</label>
+                <input type="number" id="rounds" name="rounds" value="100" min="1" />
+            </div>
 
-        <div class="form-group">
-            <label for="change">Change Guess:</label>
-            <input type="checkbox" id="change" name="change" checked="true" />
-        </div>
+            <div class="form-group">
+                <label for="change">Switch choice:</label>
+                <input type="checkbox" id="change" name="change" checked="true" />
+            </div>
 
-        <button id="run">Run Simulator</button>
+            <button id="run">Run Simulator</button>
 
-        <h4>Results</h4>
-        <p id="results"></p>
+            <div id="results"></div>
+        </section>
     </main>
 
     <footer>
         <p>&copy; 2025 Nicholas Konar</p>
     </footer>
 
-    <script src="monty-hall.js"></script>
+    <script src="monty-hall-interactive.js"></script>
+    <script src="monty-hall-bulk.js"></script>
 </body>
 
 </html>
