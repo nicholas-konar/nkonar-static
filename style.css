@@ -1,0 +1,56 @@
+/* Make html/body fill the browser window */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Use flexbox on the body for the sticky footer layout */
+body {
+  display: flex;
+  flex-direction: column; /* stacks header -> main -> footer */
+  font-family: sans-serif;
+  padding: 1rem;          /* adds some breathing room */
+}
+
+/* Main content grows to push the footer down if necessary */
+main {
+  flex: 1 0 auto;
+  margin-bottom: 2rem;
+}
+
+/* Wrap each label + input in a block (so they start on a new line),
+   but keep label/input inline so they're side by side */
+label, input {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0.25rem 0;
+}
+
+/* Slight right margin on labels so there's space before the input */
+label {
+  margin-right: 0.5rem;
+  font-weight: bold; /* optional if you want labels to stand out a bit */
+}
+
+/* Force a new line (block) for each label–input pair so they don't all run together */
+label:after {
+  content: "";
+  display: block;
+}
+
+/* The button can be inline-block or block; here we'll keep it on its own line */
+button {
+  display: inline-block;
+  margin-top: 1rem;
+}
+
+/* Footer remains at the bottom if there's not enough content */
+footer {
+  flex-shrink: 0;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+}
