@@ -54,3 +54,18 @@ footer {
   font-size: 0.9rem;
   color: #555;
 }
+
+table {
+  border-collapse: collapse; /* Clean border appearance */
+  width: 100%;              /* Full width table */
+}
+
+th, td {
+  text-align: center;        /* Horizontal centering */
+  vertical-align: middle;    /* Vertical centering */
+  padding: 8px;              /* Optional: adds space inside cells */
+}
+
+th {
+  font-weight: bold;         /* Make headers bold */
+}

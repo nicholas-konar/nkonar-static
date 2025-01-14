@@ -41,12 +41,12 @@
         <section>
             <h3>Bulk Simulator</h3>
             <div class="form-group">
-                <label for="doors"># of doors:</label>
+                <label for="doors"># of Doors:</label>
                 <input type="number" id="doors" name="doors" value="3" min="3" max="1000" />
             </div>
 
             <div class="form-group">
-                <label for="rounds"># of simulations:</label>
+                <label for="rounds"># of Simulations:</label>
                 <input type="number" id="rounds" name="rounds" value="100" min="1" />
             </div>
 
@@ -57,7 +57,24 @@
 
             <button id="run">Run Simulator</button>
 
-            <div id="results"></div>
+            <div id="bulkResults">
+                <h4 id="bulkResultsH">Results</h4>
+                <p id="bulkResultsP"><!-- JS --><br/></p>
+            </div>
+                <table id="resultsTable" border="1" style="border-collapse: collapse; width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Simulation #</th>
+                            <th>1st Choice</th>
+                            <th>Winning Door</th>
+                            <th>Outcome</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableData">
+                        <!-- Dynamic rows will be added here -->
+                    </tbody>
+                </table>
+
         </section>
     </main>
 

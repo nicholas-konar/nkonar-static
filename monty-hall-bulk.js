@@ -4,13 +4,13 @@ const random = (min, max) => {
     return Math.floor(n) + min
 }
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
 
     const runBulkSimulator = () => {
-        const doorsInput = document.getElementById("doors")
+        const doorsInput = document.getElementById('doors')
         const quantity = parseInt(doorsInput.value, 10) - 1
-        const change = document.getElementById("change")
-        const rounds = document.getElementById("rounds")
+        const change = document.getElementById('change')
+        const rounds = document.getElementById('rounds')
         const n = parseInt(rounds.value, 10)
 
         const results = Array.from({ length: n })
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
         showResults(results)
     }
 
-    document.getElementById("run").addEventListener("click", runBulkSimulator)
+    document.getElementById('run').addEventListener('click', runBulkSimulator)
 
     const runSim = (n, change) => {
         // did you choose correctly the first time?
@@ -35,11 +35,37 @@ document.addEventListener("DOMContentLoaded", () => {
         const n = results.length
         const rawPercent = (w / n) * 100
         const percent = parseFloat(rawPercent.toFixed(2))
-        
-        const title = document.getElementById('bulkResultsH')
-        title.textContent = 'Results'
 
-        const outcome = document.getElementById("bulkResultsP")
+        const outcome = document.getElementById('bulkResultsP')
         outcome.textContent = `you won ${w}/${n} or ${percent}%`
+
+        const table = document.getElementById('tableData')
+
+        // clear old results before repopulating
+        while (table.firstChild) {
+            table.removeChild(table.firstChild)
+        }
+
+        results.map((e, i) => {
+            const row = document.createElement('tr')
+
+            const simNumCell = document.createElement('td')
+            simNumCell.textContent = i + 1
+            row.appendChild(simNumCell)
+
+            const choiceCell = document.createElement('td')
+            choiceCell.textContent = e.choice + 1
+            row.appendChild(choiceCell)
+
+            const winnerCell = document.createElement('td')
+            winnerCell.textContent = e.winner + 1
+            row.appendChild(winnerCell)
+
+            const outcomeCell = document.createElement('td')
+            outcomeCell.textContent = e.won ? 'won' : 'lost'
+            row.appendChild(outcomeCell)
+
+            table.appendChild(row)
+        })
     }
 })
