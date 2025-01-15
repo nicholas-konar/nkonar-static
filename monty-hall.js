@@ -6,34 +6,42 @@ const random = (min, max) => {
 
 const runBulkSimulator = () => {
     const doorsInput = document.getElementById('doors')
-    const quantity = parseInt(doorsInput.value, 10) - 1
+    const d = parseInt(doorsInput.value, 10)
     const change = document.getElementById('change')
     const rounds = document.getElementById('rounds')
     const n = parseInt(rounds.value, 10)
 
     const results = Array.from({ length: n })
-        .map(e => runSim(quantity, change.checked))
+        .map(e => runSim(d, change.checked))
 
-    showResults(results)
+    const wins = results.filter(e => e.won).length
+    const percent = getPercentWon(wins, n)
+    const priorProb = getPriorProb(d, change.checked)
+
+    showResults(results, wins, n, percent, priorProb)
 }
 
-const runSim = (n, change) => {
+const runSim = (d, c) => {
     // did you choose correctly the first time?
-    const choice = random(0, n)
-    const winner = random(0, n)
-    const won = change ? winner != choice : winner == choice
+    const choice = random(1, d)
+    const winner = random(1, d)
+    const won = c ? winner != choice : winner == choice
     return { choice, winner, won }
 }
 
-const showResults = (results) => {
-    const wins = results.filter(e => e.won)
-    const w = wins.length
-    const n = results.length
+const getPercentWon = (w, n) => {
     const rawPercent = (w / n) * 100
-    const percent = parseFloat(rawPercent.toFixed(2))
+    return parseFloat(rawPercent.toFixed(2))
+}
 
+const getPriorProb = (d, c) => {
+    const rawPercent = c ? (d - 1) / d : 1 / d
+    return parseFloat(rawPercent.toFixed(2))
+}
+
+const showResults = (results, w, n, p, priorProb) => {
     const outcome = document.getElementById('bulkResultsP')
-    outcome.textContent = `you won ${w}/${n} or ${percent}%`
+    outcome.textContent = `You won ${w}/${n} or ${p}% \nPrior probability was ${priorProb}`
 
     const table = document.getElementById('tableData')
 
@@ -46,22 +54,22 @@ const showResults = (results) => {
         const row = document.createElement('tr')
 
         const simNumCell = document.createElement('td')
-        simNumCell.textContent = i + 1
+        simNumCell.textContent = i
         row.appendChild(simNumCell)
 
         const choiceCell = document.createElement('td')
-        choiceCell.textContent = e.choice + 1
+        choiceCell.textContent = e.choice
         row.appendChild(choiceCell)
 
         const winnerCell = document.createElement('td')
-        winnerCell.textContent = e.winner + 1
+        winnerCell.textContent = e.winner
         row.appendChild(winnerCell)
 
         const outcomeCell = document.createElement('td')
         outcomeCell.textContent = e.won ? 'won' : 'lost'
         row.appendChild(outcomeCell)
 
-        table.appendChild(row)
+        table.insertBefore(row, table.firstChild)
     })
 }
 

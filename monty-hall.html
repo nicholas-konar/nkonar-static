@@ -36,10 +36,7 @@
 
     <main>
         <section>
-            <h3>Interactive Simulator</h3>
-        </section>
-        <section>
-            <h3>Bulk Simulator</h3>
+            <h3>Simulator</h3>
             <div class="form-group">
                 <label for="doors"># of Doors:</label>
                 <input type="number" id="doors" name="doors" value="3" min="3" max="1000" />
@@ -58,10 +55,10 @@
             <button id="run">Run Simulator</button>
 
             <div id="bulkResults">
-                <h4 id="bulkResultsH">Results</h4>
-                <p id="bulkResultsP"><!-- JS --><br/></p>
+                <h3>Results</h3>
+                <p id="bulkResultsP"><!-- JS --><br /><br /></p>
             </div>
-                <table id="resultsTable" border="1" style="border-collapse: collapse; width: 100%;">
+                <table>
                     <thead>
                         <tr>
                             <th>Simulation #</th>
@@ -71,7 +68,7 @@
                         </tr>
                     </thead>
                     <tbody id="tableData">
-                        <!-- Dynamic rows will be added here -->
+                        <!-- Dynamic rows -->
                     </tbody>
                 </table>
 
@@ -82,8 +79,7 @@
         <p>&copy; 2025 Nicholas Konar</p>
     </footer>
 
-    <script src="monty-hall-interactive.js"></script>
-    <script src="monty-hall-bulk.js"></script>
+    <script src="monty-hall.js"></script>
 </body>
 
 </html>

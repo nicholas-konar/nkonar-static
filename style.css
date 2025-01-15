@@ -55,9 +55,8 @@ footer {
   color: #555;
 }
 
-table {
-  border-collapse: collapse; /* Clean border appearance */
-  width: 100%;              /* Full width table */
+table, th, td {
+  border: 1px solid black;
 }
 
 th, td {
