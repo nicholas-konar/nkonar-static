@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Monty Hall Simulator</title>
+    <link rel="stylesheet" href="../style.css" />
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+</head>
+
+<body>
+    <header>
+        <h1>Monty Hall Dilemma Game Simulator</h1>
+    </header>
+    <main>
+        <section>
+            <p>Suppose you're on a game show, and you're given the choice of three doors: Behind one door is a car;
+                behind
+                the others, goats. You pick a door, say No. 1, and the host, who knows what's behind the doors, opens
+                another door, say No. 3, which has a goat. He then says to you, "Do you want to pick door No. 2?" Is it
+                to
+                your advantage to switch your choice?</p>
+        </section>
+        <section>
+            <h3>Bayes' Theorem</h3>
+            <p>
+                $$
+                P(H \mid E) = \frac{P(E \mid H) \cdot P(H)}{P(E)}
+                $$
+            <ul>
+                <li>\(P(H \mid E)\) is the posterior probability of hypothesis \(H\) given evidence \(E\).</li>
+                <li>\(P(E \mid H)\) is the likelihood of observing evidence \(E\) given \(H\).</li>
+                <li>\(P(H)\) is the prior probability of \(H\).</li>
+                <li>\(P(E)\) is the total probability of observing evidence \(E\).</li>
+            </ul>
+            </p>
+        </section>
+
+        <h3>In Practice</h3>
+
+        <section>
+            <p>
+                Using Bayes’ Theorem, we update the probability of winning based on Monty’s actions.
+                For a game with \(n\) doors:
+            </p>
+            <ul>
+                <li>\(H_1\): Car is behind the initially chosen door.</li>
+                <li>\(H_2\): Car is behind the only other unopened door.</li>
+                <li>\(E\): Monty opens \(n-2\) doors, none of which contain the car. Based on the rules of the game, \(P(E)=1\).</li>
+            </ul>
+            <p>
+                Prior probabilities:
+            <ul>
+                <li>\(P(H_1)=\frac{1}{n}\)</li>
+                <li>\(P(H_2)=\frac{n-1}{n}\)</li>
+            </ul>
+            </p>
+            <p>
+                Since \(P(E \mid H_1)=P(E \mid H_2)=1\) and \(P(E)=1\),
+            </p>
+            <p>
+                \[
+                P(H_1 \mid E) = \frac{1\cdot\frac{1}{n}}{1} = \frac{1}{n}
+                \]
+                \[
+                P(H_2 \mid E) = \frac{1\cdot\frac{n-1}{n}}{1} = \frac{n-1}{n}
+                \]
+            </p>
+            <p>
+                <br><strong>Win by staying:</strong> \(P(\text{win by staying}) = \frac{1}{n}\)
+                <br><strong>Win by switching:</strong> \(P(\text{win by switching}) = \frac{n-1}{n}\)
+            </p>
+
+            <h3>Simulator</h3>
+            <div class="form-group">
+                <label for="doors"># of Doors:</label>
+                <input type="number" id="doors" name="doors" value="3" min="3" max="1000" />
+            </div>
+
+            <div class="form-group">
+                <label for="rounds"># of Simulations:</label>
+                <input type="number" id="rounds" name="rounds" value="100" min="1" />
+            </div>
+
+            <div class="form-group">
+                <label for="change">Switch choice:</label>
+                <input type="checkbox" id="change" name="change" checked="true" />
+            </div>
+
+            <button id="run">Run Simulator</button>
+
+            <div id="bulkResults">
+                <h3>Results</h3>
+                <p id="bulkResultsP"><!-- JS --><br /><br /></p>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Simulation #</th>
+                        <th>1st Choice</th>
+                        <th>Winning Door</th>
+                        <th>Outcome</th>
+                    </tr>
+                </thead>
+                <tbody id="tableData">
+                    <!-- Dynamic rows -->
+                </tbody>
+            </table>
+
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Nicholas Konar</p>
+    </footer>
+
+    <script src="monty-hall.js"></script>
+</body>
+
+</html>

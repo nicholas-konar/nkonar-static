@@ -41,7 +41,7 @@ const getPriorProb = (d, c) => {
 
 const showResults = (results, w, n, p, priorProb) => {
     const outcome = document.getElementById('bulkResultsP')
-    outcome.textContent = `You won ${w}/${n} or ${p}% \nPrior probability was ${priorProb}`
+    outcome.innerHTML = `You won ${w}/${n} or ${p}% <br>Prior probability was ${priorProb}`
 
     const table = document.getElementById('tableData')
 
