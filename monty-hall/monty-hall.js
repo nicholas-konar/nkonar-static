@@ -54,7 +54,7 @@ const showResults = (results, w, n, p, priorProb) => {
         const row = document.createElement('tr')
 
         const simNumCell = document.createElement('td')
-        simNumCell.textContent = i
+        simNumCell.textContent = i + 1
         row.appendChild(simNumCell)
 
         const choiceCell = document.createElement('td')
