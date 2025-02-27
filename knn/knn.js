@@ -116,12 +116,12 @@ async function process(data) {
     const threshold = .5
     const normalized = normalize(data, threshold)
     const compressed = compress(normalized, 10, 10)
-    console.log(compressed)    
-    //const res = await fetch('https://ue9q0156l5.execute-api.us-east-2.amazonaws.com/prod/knn', {
-    //  method: 'POST',
-    //  headers: { 'Content-Type': 'application/json' },
-    //  body: JSON.stringify({'vector': compressed})
-    //})
-    //console.log(res)
+    
+    const res = await fetch('https://ue9q0156l5.execute-api.us-east-2.amazonaws.com/prod/knn', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({'vector': compressed})
+    })
+    console.log(res)
 }
 
