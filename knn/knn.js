@@ -47,7 +47,7 @@ canvas.addEventListener('mousedown', startPosition);
 canvas.addEventListener('mouseup', finishedPosition);
 canvas.addEventListener('mousemove', draw);
 canvas.addEventListener('mouseout', finishedPosition);
-canvas.addEventListener('mouseup', () => {
+canvas.addEventListener('mouseup', async () => {
     const imageData = getImageData();
     process(imageData.data);
 });
@@ -80,8 +80,8 @@ function normalize(data, threshold) {
     return normalized
 }
 
-function condense(data, threshold, rowSegmentLength, columnSegmentLength) {
-    const condensed = []
+function compress(data, rowSegmentLength, columnSegmentLength) {
+    const compressed = []
     const rowLength = Math.sqrt(data.length), columnLength = Math.sqrt(data.length)
     const grid = createGrid(data, rowLength)
 
@@ -98,10 +98,10 @@ function condense(data, threshold, rowSegmentLength, columnSegmentLength) {
             // Take the average of all elements in the window
             const average = pixel.reduce((acc, x) => acc + x, 0) / pixel.length
             // Save the normalized data to the new lower resolution array
-            condensed.push(average > threshold ? 1 : 0)
+            compressed.push(average)
         }
     }
-    return condensed
+    return compressed
 }
 
 function createGrid(data, rowLength) {
@@ -112,12 +112,16 @@ function createGrid(data, rowLength) {
     return grid
 }
 
-function process(data) {
+async function process(data) {
     const threshold = .5
     const normalized = normalize(data, threshold)
-    const condensed = condense(normalized, threshold, 10, 10)
-    for (let chunk of chunks(condensed, 28)) {
-        console.log(chunk)
-    }
+    const compressed = compress(normalized, 10, 10)
+    console.log(compressed)    
+    //const res = await fetch('https://ue9q0156l5.execute-api.us-east-2.amazonaws.com/prod/knn', {
+    //  method: 'POST',
+    //  headers: { 'Content-Type': 'application/json' },
+    //  body: JSON.stringify({'vector': compressed})
+    //})
+    //console.log(res)
 }
 

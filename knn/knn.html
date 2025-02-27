@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Digit Draw</title>
-    <style>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <!--<link rel="stylesheet" href="../style.css" />-->
+      <title>Nicholas Konar</title>
+      <style>
         #drawCanvas {
-            border: 1px solid #000;
-            touch-action: none;
+          border: 1px solid #000;
+          touch-action: none;
         }
-    </style>
-</head>
+      </style>
+    </head>
+    <body>
+      <canvas id="drawCanvas" width="280" height="280"></canvas>
+      <div class="container">
+        <p id="vector"></p>
+      </div>
+      <script src="knn.js"></script>
+    </body>
+  </html>
 
-<body>
-    <canvas id="drawCanvas" width="280" height="280"></canvas>
-
-    <script src="knn.js"></script>
-</body>
-
-</html>
