@@ -122,6 +122,6 @@ async function process(data) {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({'vector': compressed})
     })
-    console.log(res)
+    console.log(await res.json())
 }
 
