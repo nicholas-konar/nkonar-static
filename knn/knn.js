@@ -44,6 +44,7 @@ function getCoordinates(e) {
 }
 
 // Mouse events
+canvas.addEventListener("mousedown", clearImageData);
 canvas.addEventListener("mousedown", startPosition);
 canvas.addEventListener("mouseup", finishedPosition);
 canvas.addEventListener("mousemove", draw);
@@ -63,6 +64,10 @@ canvas.addEventListener("touchcancel", finishedPosition);
 function getImageData() {
   // Returns a 2D pixel array from the canvas
   return ctx.getImageData(0, 0, canvas.width, canvas.height);
+}
+
+function clearImageData() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
 // Cleaner to iterate over arrays in sections. Yields n elements at a time.
@@ -134,14 +139,17 @@ async function process(data) {
   const display = document.getElementById("result");
   display.innerText = "loading...";
 
+  const sliderVal = document.getElementById("slider").value;
+  const k = sliderVal || undefined; // allow lambda to use its own fallback
+
   try {
     const res = await fetch("http://127.0.0.1:3000/knn", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ vector: compressed }),
+      body: JSON.stringify({ vector: compressed, k }),
     });
     const { result, nearestNeighbors } = await res.json();
-    display.innerText = result;
+    display.innerText = `Looks like a ${result}. The ${k} nearest neighbors in the MNIST data set are ${nearestNeighbors}`;
   } catch (error) {
     console.error("Unexpected Error", error);
   }
