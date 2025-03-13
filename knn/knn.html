@@ -14,9 +14,26 @@
       </style>
     </head>
     <body>
+      <h2>K-Nearest Neighbors</h2>
+      <p>
+        Draw a number in the box and determine what it is based on the K-NN
+        algorithm. It's a python script running on AWS Lambda, so it may take a
+        few seconds to load on a cold start. See the code
+        <a href="https://github.com/nicholas-konar/knn">here</a>.
+      </p>
       <canvas id="drawCanvas" width="280" height="280"></canvas>
       <div class="container">
-        <p id="vector"></p>
+        <label for="slider">Select a value for K</label>
+        <input type="range" id="slider" min="1" max="50" step="1" value="5" />
+        <span id="sliderVal">5</span>
+        <script>
+          const slider = document.getElementById("slider");
+          const sliderVal = document.getElementById("sliderVal");
+          slider.addEventListener("input", () => {
+            sliderVal.innerText = slider.value;
+          });
+        </script>
+
         <p id="result"></p>
       </div>
       <script src="knn.js"></script>
